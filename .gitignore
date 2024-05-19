@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# VS_folder
+.vs/
+
+# Exe_files
+x64/
+
+!lib/ukrString.obj
+!lib/pch/ukrString/pch.obj
+!dlls/ukrString.dll
