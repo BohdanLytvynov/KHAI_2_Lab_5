@@ -16,7 +16,7 @@ struct Student : public Person
 
 #pragma region Ctor
 
-	Student(const us& name, const us& surename, const us& lastname, int age, int group, float mark);
+	Student(const int id, const us& name, const us& surename, const us& lastname, int age, int group, float mark);
 
 #pragma endregion
 

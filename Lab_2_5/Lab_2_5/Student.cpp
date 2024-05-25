@@ -18,8 +18,8 @@ float& s::GetMark()
 
 #pragma region Ctor
 
-s::Student(const us& name, const us& surename, const us& lastname, int age, int group, float mark) :
-	Person(name, surename, lastname, age), m_group(group), m_mark(mark)
+s::Student(const int id, const us& name, const us& surename, const us& lastname, int age, int group, float mark) :
+	Person(id, name, surename, lastname, age), m_group(group), m_mark(mark)
 {
 
 }
