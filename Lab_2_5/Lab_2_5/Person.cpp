@@ -3,28 +3,28 @@
 using p = Person;
 
 #pragma region Get Set
-
+//Get
 const int& p::GetId() const
 {
 	return m_id;
 }
 
-us& p::GetName()
+us p::GetName() const
 {
 	return m_name;
 }
 
-us& p::GetSurename()
+us p::GetSurename() const
 {
 	return m_surename;
 }
 
-us& p::GetLastname()
+us p::GetLastname() const
 {
 	return m_lastname;
 }
 
-int& p::GetAge()
+int p::GetAge() const
 {
 	return m_age;
 }
@@ -33,12 +33,40 @@ const age_valid& p::GetAgeValidator() const
 {
 	return m_age_validator;
 }
+//Protected
+void p::SetId(int newId)
+{
+	m_id = newId;
+}
+
+//Set
+void Person::SetName(const us& name)
+{
+	m_name = name;
+}
+
+void Person::SetSurename(const us& sure_name)
+{
+	m_surename = sure_name;
+}
+
+void Person::SetLastname(const us& last_name)
+{
+	m_lastname = last_name;
+}
+
+void Person::SetAge(int age)
+{
+	m_age = age;
+}
 
 #pragma endregion
 
 #pragma region Ctor definition
 
-p::Person(const int id, const us& name, const us& surename, const us& lastname, int age,
+p::Person() {}
+
+p::Person(const int id, const us& surename, const us& name, const us& lastname, int age,
 	age_valid* age_validator):
 	m_id(id), m_name(name), m_surename(surename), m_lastname(lastname)	
 {	

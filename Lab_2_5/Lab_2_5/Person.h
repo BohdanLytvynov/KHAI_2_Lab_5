@@ -18,16 +18,26 @@ struct Person
 {
 
 #pragma region Get Set
-
+	//Get
 	const int& GetId() const;
 
-	us& GetName();
+	us GetName() const;
 
-	us& GetSurename();
+	us GetSurename() const;
 
-	us& GetLastname();
+	us GetLastname() const;
 
-	int& GetAge();
+	int GetAge() const;
+
+	//Set
+
+	void SetName(const us& name);
+
+	void SetSurename(const us& sure_name);
+
+	void SetLastname(const us& last_name);
+
+	void SetAge(int age);
 
 	const age_valid& GetAgeValidator() const;
 
@@ -85,7 +95,7 @@ struct Person
 
 	friend std::ofstream& operator << (std::ofstream& outf, const Person& p)
 	{
-		outf << p.m_id << " " << p.m_surename << " " << p.m_name << " " << p.m_lastname << " " << p.m_age;
+		outf << p.m_id << " " << p.m_surename << " " << p.m_name << " " << p.m_lastname << " " << p.m_age << std::endl;
 
 		return outf;
 	}
@@ -136,14 +146,17 @@ struct Person
 
 #pragma region Ctor
 
-	Person(const int id, const us& name, const us& surename, const us& lastname, int age,
+	Person();
+
+	Person(const int id, const us& surename, const us& name, const us& lastname, int age,
 		age_valid* age_vlidator = nullptr);
 		
 	Person(const Person& other);
 	
 
 #pragma endregion
-
+protected:
+	void SetId(int newId);
 
 private:
 #pragma region State
