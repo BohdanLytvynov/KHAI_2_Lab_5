@@ -116,6 +116,7 @@ p::Person(const p& other)
 	m_surename = other.m_surename;
 	m_lastname = other.m_lastname;
 	m_age = other.m_age;
+
 	m_age_validator = other.m_age_validator;	
 }
 

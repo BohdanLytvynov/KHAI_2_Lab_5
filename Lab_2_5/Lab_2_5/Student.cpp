@@ -97,5 +97,44 @@ s::Student(const int id, const us& surename, const us& name, const us& lastname,
 	m_mark = mark;
 }
 
+Student::Student(const Student& other) : Person(other)
+{
+	this->m_group = other.m_group;
+	this->m_mark = other.m_mark;
+
+	this->m_group_validator = other.m_group_validator;
+	this->m_mark_validator = other.m_mark_validator;
+}
+
 #pragma endregion
+
+#pragma region Logical operators
+
+bool Student::operator==(const Student& r) const
+{
+	return r.GetId() == r.GetId();
+}
+
+bool Student::operator!=(const Student& r) const
+{
+	return r.GetId() != r.GetId();
+}
+
+Student& Student::operator=(const Student& other)
+{
+	this->operator=(other);
+
+	m_group = other.m_group;
+
+	m_mark = other.m_mark;
+
+	m_group_validator = other.m_group_validator;
+
+	m_mark_validator = other.m_mark_validator;
+
+	return *this;
+}
+
+#pragma endregion
+
 

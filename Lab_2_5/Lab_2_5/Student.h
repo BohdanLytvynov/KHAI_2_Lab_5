@@ -149,7 +149,6 @@ struct Student : public Person
 #pragma endregion
 
 
-
 #pragma region Logical operators
 
 	bool operator == (const Student& r) const;
