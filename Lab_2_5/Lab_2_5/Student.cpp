@@ -3,7 +3,7 @@
 using s = Student;
 
 #pragma region Get Set Definitions
-
+//Get
 int s::GetGroup() const
 {
 	return m_group;
@@ -13,7 +13,7 @@ float s::GetMark() const
 {
 	return m_mark;
 }
-
+//Set
 void s::SetGroup(int group)
 {
 	m_group = group;
@@ -120,6 +120,10 @@ bool Student::operator!=(const Student& r) const
 	return r.GetId() != r.GetId();
 }
 
+#pragma endregion
+
+#pragma region Assignment operator
+
 Student& Student::operator=(const Student& other)
 {
 	this->operator=(other);
@@ -136,5 +140,6 @@ Student& Student::operator=(const Student& other)
 }
 
 #pragma endregion
+
 
 
