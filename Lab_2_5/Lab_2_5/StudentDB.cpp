@@ -93,4 +93,15 @@ student_db::student_db(Idata_provider<Student>* dataProvider,
 	
 }
 
+void student_db::Add(const Student& entity)
+{
+	int id = file_data_base<Student>::GetDataSet().size() + 1;
+
+	Student& temp = const_cast<Student&>(entity);
+
+	temp.SetId(id);
+
+	file_data_base<Student>::Add(temp);
+}
+
 

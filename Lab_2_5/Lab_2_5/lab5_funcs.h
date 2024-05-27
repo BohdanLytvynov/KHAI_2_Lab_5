@@ -95,7 +95,7 @@ namespace lab5_functions
 		return r.GetGroup() > l.GetGroup();
 	}
 
-	static bool Pred_Group(const Student& r, const Student& l)
+	static bool Pred_Mark(const Student& r, const Student& l)
 	{
 		return r.GetMark() > l.GetMark();
 	}

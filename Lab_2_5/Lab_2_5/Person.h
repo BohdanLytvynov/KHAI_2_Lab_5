@@ -86,7 +86,9 @@ struct Person
 
 	friend std::ostream& operator << (std::ostream& os, const Person& p)
 	{
-		os << p.m_id << " ) " << p.m_surename << " " << p.m_name << " " << p.m_lastname << " " << p.m_age << std::endl;
+		os << "Id: " << p.m_id << " | " << p.m_surename << " | " << p.m_name << " | " << p.m_lastname << " | " << p.m_age << std::endl;
+
+		return os;
 	}
 
 #pragma endregion
@@ -152,7 +154,7 @@ struct Person
 
 
 #pragma endregion
-protected:
+
 	void SetId(int newId);
 
 private:

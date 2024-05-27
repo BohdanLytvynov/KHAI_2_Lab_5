@@ -39,6 +39,12 @@ struct student_db : file_data_base<Student>
 	
 #pragma endregion
 
+#pragma region Function
+
+	void Add(const Student& entity) override;
+
+#pragma endregion
+
 
 };
 
