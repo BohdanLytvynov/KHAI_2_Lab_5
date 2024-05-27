@@ -40,7 +40,7 @@ namespace validation
 				return false;
 			}
 
-			if (!m_add_validation)
+			if (m_add_validation != nullptr)
 				return m_add_validation(out, error);
 
 			return true;			

@@ -145,7 +145,7 @@ struct Person
 
 #pragma region Ctor
 
-	Person();
+	Person(age_valid* age_vlidator = nullptr);
 
 	Person(const int id, const us& surename, const us& name, const us& lastname, int age,
 		age_valid* age_vlidator = nullptr);

@@ -8,7 +8,8 @@
 #include <crtdbg.h>
 #include<algorithm>
 
-std::string m_path_to_file = "Data/Students.txt";
+
+std::string m_path_to_file = "../Data/Students.txt";
 
 int main()
 {
@@ -39,7 +40,7 @@ int main()
     }
     catch (const std::runtime_error& er)
     {
-        cout << er.what() << endl;
+        std::cout << er.what() << endl;
     }
    
 
@@ -70,6 +71,12 @@ int main()
         Student s;
 
         Student* s_ptr = nullptr;
+
+        string new_field;
+
+        int new_int = 0;
+
+        float new_mark = 0.0;
 
         switch (com)
         {
@@ -156,7 +163,7 @@ int main()
 
                 std::cout << "Student Database\n" << std::endl;
 
-                cin >> s;
+                std::cin >> s;
 
                 db->Add(s);
 
@@ -172,23 +179,150 @@ int main()
 
                 std::cout << "Student Database\n" << std::endl;
 
-                id = Input<int>(us("Введіть ідентифікатор Студента (Указано як поле Id)"), to_int_converter);
+                id = Input<int>(us("Введіть ідентифікатор Студента (Указано як поле Id): "), to_int_converter);
 
                 s_ptr = db->Search([id](const Student& ent)-> bool { return ent.GetId() == id; });
 
                 if (s_ptr != nullptr)
                 {
-                    cout << *s_ptr<< endl;
+                    std::cout << *s_ptr<< endl;
 
-                    cout << "\n";
+                    std::cout << "\n";
 
-                    //Edit
-                    // 
-                    //                     
+                    int field = Input<int>(us("Яке поле студента ви хочете відредагувати? \n\t1) Прізвище - тисніть 1. \n\t2) Ім\"я - тисніть 2. \n\t3) По-батькові - тисніть 3. \n\t4) Вік - тисніть 4. \n\t5) Группу - тисніть 5. \n\t6) Оцінку - тисніть 6."),
+                        to_int_converter,
+                        [](string& inp, us& error)->bool
+                        {
+                            int temp = stoi(inp);
+
+                            if (temp < 0 && temp > 6)
+                            {
+                                std::cout << us("Невірно вибране поле для редагування, спробуйте ще:!") << endl;
+
+                                return false;
+                            }
+
+                            return true;
+                        });
+
+                    if (field == 1)
+                    {
+                        do
+                        {
+                            std::cout << us("Введіть нове Прізвище: (Та натисніть Ентер)") << endl;
+
+                            std::cin >> new_field;
+
+                        } while (!AcceptInput<string>(new_field));
+                        
+                        s_ptr->SetSurename(us(new_field));
+                    }
+                    else if (field == 2)
+                    {
+                        do
+                        {
+                            std::cout << us("Введіть нове Ім\"я: (Та натисніть Ентер)") << endl;
+
+                            std::cin >> new_field;
+
+                        } while (!AcceptInput<string>(new_field));
+
+                        s_ptr->SetName(us(new_field));
+                    }
+                    else if (field == 3)
+                    {
+                        do
+                        {
+                            std::cout << us("Введіть нове По-батькові: (Та натисніть Ентер)") << endl;
+
+                            std::cin >> new_field;
+
+                        } while (!AcceptInput<string>(new_field));
+
+                        s_ptr->SetLastname(us(new_field));
+                    }
+                    else if (field == 4)
+                    {
+                        do
+                        {
+                            new_int = Input<int>(us("Введіть новий вік студента: (Та натисніть Ентер)"),
+                                to_int_converter,
+                                [](std::string& inp, us& error)->bool
+                                {
+                                    int temp = std::stoi(inp);
+
+                                    if (temp < 0)
+                                    {
+                                        error = "Вік не може бути від\"ємним!";
+                                        return false;
+                                    }
+                                    else if (temp > 100)
+                                    {
+                                        error = "Вік не може бути більше 100!";
+                                        return false;
+                                    }
+
+                                    return true;
+                                });
+
+                        } while (!AcceptInput<int>(new_int));
+
+                        s_ptr->SetAge(new_int);
+                    }
+                    else if (field == 5)
+                    {
+                        do
+                        {
+                            new_int = Input<int>(us("Введіть нову группу студента: (Та натисніть Ентер)"),
+                                to_int_converter,
+                                [](std::string& inp, us& error)->bool
+                                {
+                                    int temp = std::stoi(inp);
+
+                                    if (temp < 0)
+                                    {
+                                        error = "Группа не може бути від\"ємним!";
+                                        return false;
+                                    }
+
+                                    return true;
+                                });
+
+                        } while (!AcceptInput<int>(new_int));
+
+                        s_ptr->SetGroup(new_int);
+                    }
+                    else if (field == 6)
+                    {
+                        do
+                        {
+                            new_mark = Input<float>(us("Введіть нову Оцінку студента: (Та натисніть Ентер)"),
+                                to_int_converter,
+                                [](std::string& inp, us& error)->bool
+                                {
+                                    float temp = std::stof(inp);
+
+                                    if (temp < 0)
+                                    {
+                                        error = "Группа не може бути від\"ємна!";
+                                        return false;
+                                    }
+
+                                    return true;
+                                });
+
+                        } while (!AcceptInput<float>(new_mark));
+
+                        s_ptr->SetMark(new_mark);
+                    }
+                    
+                    db->Save();
+                    
+                    std::cout << us("Редагування студента завершено!") << endl;
                 }
                 else
                 {
-                    cout << us("Студента з таким ай ді не існує!") << endl;
+                    std::cout << us("Студента з таким ай ді не існує!") << endl;
                 }
                     
                 break;
@@ -205,29 +339,31 @@ int main()
 
                 if (s_ptr != nullptr)
                 {
-                    cout << *s_ptr << endl;
+                    std::cout << *s_ptr << endl;
 
-                    cout << "\n";
+                    std::cout << "\n";
                  
-                    //Delete
+                    if (AcceptCommand(us("Підтвердіть команду видалення студента.")))
+                    {
+                        db->Delete(*s_ptr);
 
+                        db->Save();
+                    }
+                    else
+                    {
+                        std::cout << us("Видалення відмінено!") << std::endl;
+                    }
                 }
                 else
                 {
-                    cout << us("Студента з таким ай ді не існує!") << endl;
-                }
-
-                /*db->Delete(*s_ptr);
-
-                db->Save();*/
+                    std::cout << us("Студента з таким ай ді не існує!") << endl;
+                }               
 
                 break;
 
             default:
                 break;
         }
-
-
 
     } while (true);
 

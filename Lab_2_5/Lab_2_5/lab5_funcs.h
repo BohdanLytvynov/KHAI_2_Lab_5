@@ -67,6 +67,48 @@ namespace lab5_functions
 			std::cout << s;
 		}
 	}
+	template<class T>
+	static bool AcceptInput(T inp)
+	{
+		bool status = false;
+		std::string inp_str;
+		do
+		{
+			std::cout << us("Ви ввели: ") << inp << std::endl;
+			std::cout << "\n";
+			std::cout << us("Натисніть Y, якщо згодні, N, якщо ні(букви в малому регістрі)");
+
+			std::cin >> inp_str;
+
+			if (inp_str == "Y" || inp_str == "y" || inp_str == "н" || inp_str == "Н")
+				return true;
+
+			if (inp_str == "N" || inp_str == "n" || inp_str == "т" || inp_str == "Т")
+				return false;
+
+		} while (true);		
+	}
+
+	static bool AcceptCommand(const us& com)
+	{
+		bool status = false;
+		std::string inp_str;
+		do
+		{		
+			std::cout << com << std::endl;
+
+			std::cout << us("Натисніть Y, якщо згодні, N, якщо ні(букви в малому регістрі)");
+
+			std::cin >> inp_str;
+
+			if (inp_str == "Y" || inp_str == "y" || inp_str == "н" || inp_str == "Н")
+				return true;
+
+			if (inp_str == "N" || inp_str == "n" || inp_str == "т" || inp_str == "Т")
+				return false;
+
+		} while (true);
+	}
 
 #pragma region Predicates for Sorting
 

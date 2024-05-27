@@ -25,7 +25,7 @@ private:
 
 	std::ofstream* m_out_file_stream;
 
-	mutable char m_input_output;
+	mutable int m_input_output;
 
 	std::string m_path;
 };
