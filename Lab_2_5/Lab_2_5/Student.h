@@ -30,7 +30,8 @@ struct Student : public Person
 
 #pragma region Ctor
 
-	Student();
+	Student(age_valid* age_validator = nullptr,
+		group_valid* group_validator = nullptr, mark_valid* mark_validator = nullptr);
 
 	Student(const int id, const us& surename, const us& name, const us& lastname,
 		int age, int group, float mark, age_valid* age_validator = nullptr,
@@ -94,6 +95,8 @@ struct Student : public Person
 			}
 		}
 
+		s.m_mark = std::stof(temp_inp);
+
 		return is;
 	}
 
@@ -141,7 +144,7 @@ struct Student : public Person
 
 	friend std::ofstream& operator << (std::ofstream& ofs, Student& s)
 	{
-		ofs << s.GetId() << " " << s.GetSurename() << " " << s.GetName() << " " << s.GetLastname() << " " << s.GetAge() << s.m_group << " " << s.m_mark << std::endl;
+		ofs << s.GetId() << " " << s.GetSurename() << " " << s.GetName() << " " << s.GetLastname() << " " << s.GetAge()<< " " << s.m_group << " " << s.m_mark << std::endl;
 
 		return ofs;
 	}

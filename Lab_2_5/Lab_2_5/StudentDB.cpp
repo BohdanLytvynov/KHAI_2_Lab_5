@@ -24,9 +24,14 @@ std::vector<Student> student_db_provider::ReadFromSource()
 {
 	std::vector<Student> res;
 
-	if (m_input_output != 0)
+	if (m_input_output == 0)
 	{
-		m_inp_file_stream->open(m_path);
+		m_inp_file_stream->open(m_path, std::ios_base::binary);
+		m_inp_file_stream->seekg(0, std::ios_base::end);
+		int size = m_inp_file_stream->tellg();
+
+		if (size == 0)
+			return res;
 
 		m_input_output = 1;
 
@@ -38,7 +43,8 @@ std::vector<Student> student_db_provider::ReadFromSource()
 			{
 				*m_inp_file_stream >> s;
 
-				res.push_back(s);
+				if(s.GetId() >= 0)
+					res.push_back(s);
 			}
 		}
 		else
@@ -57,7 +63,7 @@ std::vector<Student> student_db_provider::ReadFromSource()
 
 void student_db_provider::SaveToSource(const std::vector<Student>& data_set) const
 {
-	if (m_input_output != 0)
+	if (m_input_output == 0)
 	{
 		m_out_file_stream->open(m_path);
 
@@ -91,6 +97,17 @@ student_db::student_db(Idata_provider<Student>* dataProvider,
 	: file_data_base(dataProvider, edit_proc)
 {
 	
+}
+
+void student_db::Add(const Student& entity)
+{
+	int id = file_data_base<Student>::GetDataSet().size() + 1;
+
+	Student& temp = const_cast<Student&>(entity);
+
+	temp.SetId(id);
+
+	file_data_base<Student>::Add(temp);
 }
 
 

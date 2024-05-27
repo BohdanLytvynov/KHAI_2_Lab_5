@@ -29,7 +29,7 @@ struct file_data_base
 
 		m_file_data_set = m_data_provider->ReadFromSource();	
 
-		if (m_edit_proc != nullptr)
+		if (edit_proc != nullptr)
 			m_edit_proc = edit_proc;
 		else
 			throw std::runtime_error("Edit procedure not set!");		

@@ -64,19 +64,51 @@ void Person::SetAge(int age)
 
 #pragma region Ctor definition
 
-p::Person() {}
+p::Person(age_valid* age_validator)
+{
+	/*m_name.use_for_input();
+
+	m_surename.use_for_input();
+
+	m_lastname.use_for_input();*/
+
+	if (age_validator == nullptr)
+	{
+		auto valid_age_range = [](const int& inp, strings::ukrString& error)-> bool
+			{
+				if (inp <= 0 || inp > 70)
+				{
+					error = "Невірний діапазон чисел!";
+
+					return false;
+				}
+
+				return true;
+			};
+
+		auto age_converter = [](const std::string& inp) -> int
+			{
+				return std::stoi(inp);
+			};
+
+		m_age_validator = age_valid(us("Помилка при конвертуванні до числа!"),
+			age_converter, valid_age_range);
+	}
+	else
+		m_age_validator = *age_validator;
+}
 
 p::Person(const int id, const us& surename, const us& name, const us& lastname, int age,
 	age_valid* age_validator):
 	m_id(id), m_name(name), m_surename(surename), m_lastname(lastname)	
 {	
-	m_name.use_for_input();
+	/*m_name.use_for_input();
 
 	m_surename.use_for_input();
 
-	m_lastname.use_for_input();
+	m_lastname.use_for_input();*/
 	
-	if (age < 0 && age > 100)
+	if (age < 0 || age > 100)
 		throw std::runtime_error("Incorrect range for age variable!");
 	else
 	{

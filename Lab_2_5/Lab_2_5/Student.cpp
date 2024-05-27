@@ -28,7 +28,56 @@ void s::SetMark(float mark)
 
 #pragma region Ctor
 
-s::Student() {}
+s::Student(age_valid* age_validator,
+	group_valid* group_validator, mark_valid* mark_validator) : Person(age_validator) 
+{
+	if (group_validator == nullptr)
+	{
+		m_group_validator = group_valid(us("Помилка при введені номера групи!"),
+			[](const std::string& inp) -> int
+			{
+				return std::stoi(inp);
+			},
+			[](const int& inp, us& error) -> bool
+			{
+				if (inp < 0)
+				{
+					error = "Номер группи не може бути меньше 0!";
+
+					return false;
+				}
+
+				return true;
+			});
+	}
+	else
+	{
+		m_group_validator = *group_validator;
+	}
+
+	if (mark_validator == nullptr)
+	{
+		m_mark_validator = mark_valid(us("Помилка при введені оцінки студента!"),
+			[](const std::string& inp)-> float
+			{
+				return std::stof(inp);
+			},
+			[](const float& inp, us& error) -> bool
+			{
+				if (inp < 0)
+				{
+					error = "Оцінка не може бути від\"ємна!";
+					return false;
+				}
+
+				return true;
+			});
+	}
+	else
+	{
+		m_mark_validator = *mark_validator;
+	}
+}
 
 s::Student(const int id, const us& surename, const us& name, const us& lastname,
 	int age, int group, float mark, age_valid* age_validator,

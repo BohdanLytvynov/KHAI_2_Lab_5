@@ -25,7 +25,7 @@ private:
 
 	std::ofstream* m_out_file_stream;
 
-	mutable char m_input_output;
+	mutable int m_input_output;
 
 	std::string m_path;
 };
@@ -37,6 +37,12 @@ struct student_db : file_data_base<Student>
 	student_db(Idata_provider<Student>* dataProvider, 
 		std::function<void(Student*, const Student&)> edit_proc);
 	
+#pragma endregion
+
+#pragma region Function
+
+	void Add(const Student& entity) override;
+
 #pragma endregion
 
 
