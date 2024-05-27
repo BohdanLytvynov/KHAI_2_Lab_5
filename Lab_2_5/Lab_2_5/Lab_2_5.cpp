@@ -2,19 +2,122 @@
 //
 
 #include <iostream>
+#include "StudentDb.h"
+#include "lab5_funcs.h"
+#include <fstream>
+#include <crtdbg.h>
+
+std::string m_path_to_file = "Data/Students.txt";
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    using namespace lab5_functions;
+    using namespace std;
+
+    int flag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+    flag |= _CRTDBG_LEAK_CHECK_DF;
+    _CrtSetDbgFlag(flag);
+
+    std::ifstream inp_file_stream;
+
+    std::ofstream ofstream;
+
+    std::cout << "Student Database" << std::endl;
+
+    student_db_provider* st_db_prov;
+
+    student_db* db;
+
+#pragma region Initialize data base
+
+    try
+    {
+        st_db_prov = new student_db_provider(m_path_to_file, &inp_file_stream, &ofstream);
+
+        db = new student_db(st_db_prov, edit_proc);
+    }
+    catch (const std::runtime_error& er)
+    {
+        cout << er.what() << endl;
+    }
+   
+
+#pragma endregion
+
+    do
+    {
+        int com = Input<int>(us("Виберіть опцію: \n\t1) Переглянути базу данних, натисніть 1"), to_int_converter,
+            [](string& inp, us& error)->bool
+            {
+                int c = stoi(inp);
+
+                if (c < 0)
+                {
+                    error = "Невірний ввод команди!";
+
+                    return false;
+                }
+                return true;
+            });
+
+        vector<Student> students;
+
+        switch (com)
+        {
+            case 1://View Data Base
+
+                std::cout << "Student Database" << std::endl;
+
+                system("cls");
+
+                students = db->GetDataSet();
+
+                Display(students);
+
+                int sort_com = 0;
+
+                do
+                {
+                    sort_com = Input<int>(us("Сортування: \n\t1) За Прізвищем - натисніть 1. \n\t2) За Іменем - натисніть 2. \n\t3) За По-Батькові - натисніть 3. \n\t4) За Віком - натисніть 4. \n\t5) За группою - натисніть 5. \n\t6) За оцінкою - натисніть 6. \n\t7) Вийти з режиму перегляду - натисніть 7."), to_int_converter,
+                        [](string& inp, us& error)->bool
+                        {
+                            int c = stoi(inp);
+
+                            if (c < 0 && c > 7)
+                            {
+                                error = "Невірний ввод команди!";
+
+                                return false;
+                            }
+                            return true;
+                        });
+
+                    switch (sort_com)
+                    {
+                    case 1:
+                        break;
+                    }
+
+                } while (sort_com != 7);
+                
+            break;
+            default:
+                break;
+        }
+
+
+
+    } while (true);
+
+#pragma region Clear data base
+
+    delete st_db_prov;
+
+    delete db;
+
+#pragma endregion
+
+
+    return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab_2_5", "Lab_2_5\Lab_2_5.vcxproj", "{0F0F6D46-3B2C-446F-9537-07313C76295C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "File_data_base", "File_data_base\File_data_base.vcxproj", "{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{0F0F6D46-3B2C-446F-9537-07313C76295C}.Release|x64.Build.0 = Release|x64
 		{0F0F6D46-3B2C-446F-9537-07313C76295C}.Release|x86.ActiveCfg = Release|Win32
 		{0F0F6D46-3B2C-446F-9537-07313C76295C}.Release|x86.Build.0 = Release|Win32
+		{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}.Debug|x64.ActiveCfg = Debug|x64
+		{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}.Debug|x64.Build.0 = Debug|x64
+		{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}.Debug|x86.ActiveCfg = Debug|Win32
+		{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}.Debug|x86.Build.0 = Debug|Win32
+		{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}.Release|x64.ActiveCfg = Release|x64
+		{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}.Release|x64.Build.0 = Release|x64
+		{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}.Release|x86.ActiveCfg = Release|Win32
+		{9D50A5EE-2919-4DAC-BCCD-1581C37F0619}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
