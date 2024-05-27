@@ -45,7 +45,7 @@ struct Person
 
 #pragma region Operators for input and output
 
-    friend std::istream& operator >> (std::istream& is, Person& p)
+	friend std::istream& operator >> (std::istream& is, Person& p)
 	{
 		std::cout << us("¬вед≥ть пр≥звище людини:") << std::endl;
 
@@ -80,7 +80,7 @@ struct Person
 				std::cout << error << std::endl;
 			}
 		}
-				
+
 		return is;
 	}
 
@@ -108,22 +108,19 @@ struct Person
 
 		char delim[] = { ' ' };
 
-		while (!inf.eof())
+		us::getLine(inf, temp);
+
+		if (temp.getLength() > 0)
 		{
-			us::getLine(inf, temp);
+			us::Split(temp, words, delim);
 
-			if (temp.getLength() > 0)
-			{
-				us::Split(temp, words, delim);
-
-				p.m_id = std::stoi(words[0].to_string());
-				p.m_surename = words[1];
-				p.m_name = words[2];
-				p.m_lastname = words[3];
-				p.m_age = std::stoi(words[4].to_string());							
-			}
+			p.m_id = std::stoi(words[0].to_string());
+			p.m_surename = words[1];
+			p.m_name = words[2];
+			p.m_lastname = words[3];
+			p.m_age = std::stoi(words[4].to_string());
 		}
-
+		
 		return inf;
 	}
 
@@ -132,9 +129,9 @@ struct Person
 #pragma region Logic operators
 
 	bool operator == (const Person& r) const;
-	
+
 	bool operator != (const Person& r) const;
-	
+
 #pragma endregion
 
 #pragma region Assignment operator
@@ -150,9 +147,9 @@ struct Person
 
 	Person(const int id, const us& surename, const us& name, const us& lastname, int age,
 		age_valid* age_vlidator = nullptr);
-		
+
 	Person(const Person& other);
-	
+
 
 #pragma endregion
 protected:
@@ -161,7 +158,7 @@ protected:
 private:
 #pragma region State
 	int m_id;
-	
+
 	us m_name;
 
 	us m_surename;

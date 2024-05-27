@@ -33,8 +33,8 @@ struct Student : public Person
 	Student();
 
 	Student(const int id, const us& surename, const us& name, const us& lastname,
-		int age, int group, float mark, age_valid *age_validator = nullptr, 
-		group_valid* group_validator= nullptr, mark_valid* mark_validator = nullptr);
+		int age, int group, float mark, age_valid* age_validator = nullptr,
+		group_valid* group_validator = nullptr, mark_valid* mark_validator = nullptr);
 
 	Student(const Student& other);
 
@@ -118,7 +118,7 @@ struct Student : public Person
 
 		char delim[] = { ' ' };
 
-		while (!ifs.eof())
+		if (!ifs.eof())
 		{
 			us::getLine(ifs, row);
 
@@ -162,8 +162,6 @@ struct Student : public Person
 	Student& operator = (const Student& other);
 
 #pragma endregion
-
-
 
 private:
 #pragma region State
